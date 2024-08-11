@@ -34,6 +34,11 @@ public class JwtService {
                 .compact();
     }
 
+    public boolean isTokenValid (String token, UserDetails userDetails) {
+        final String username = getUsernameFromToken(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
+
     private Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
