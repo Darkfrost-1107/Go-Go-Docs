@@ -1,4 +1,4 @@
-package gogodocs.backend.jwt;
+package gogodocs.backend.config;
 
 import gogodocs.backend.models.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
