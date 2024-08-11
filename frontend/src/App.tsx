@@ -1,5 +1,5 @@
-import './App.css'
-import { Button } from '@/components/ui/button'
+import './App.css';
+import { Button } from '@/components/ui/button';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
