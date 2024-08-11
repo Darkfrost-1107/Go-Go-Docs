@@ -28,7 +28,7 @@ public class AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException
                         ("User with username " + loginRequest.getUsername() + " not found"));
         String token = jwtService.getToken(user);
-        
+
         return AuthResponse.builder()
                 .token(token)
                 .build();
