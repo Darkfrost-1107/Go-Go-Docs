@@ -1,4 +1,4 @@
-package gogodocs.backend.documents;
+package gogodocs.backend.models.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

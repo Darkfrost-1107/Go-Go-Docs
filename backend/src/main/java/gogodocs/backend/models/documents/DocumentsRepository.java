@@ -1,4 +1,4 @@
-package gogodocs.backend.documents;
+package gogodocs.backend.models.documents;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

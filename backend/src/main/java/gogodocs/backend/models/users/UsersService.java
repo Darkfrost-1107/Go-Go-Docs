@@ -1,4 +1,4 @@
-package gogodocs.backend.users;
+package gogodocs.backend.models.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package gogodocs.backend.documents;
+package gogodocs.backend.models.documents;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
