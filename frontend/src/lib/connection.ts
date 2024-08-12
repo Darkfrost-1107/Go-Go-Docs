@@ -1,4 +1,4 @@
-import { BACKEND_URL } from '@/config/global';
+import { BACKEND_URL } from '@/config/client';
 
 export const secureFetch = (url: string, options?: RequestInit) => {
   const token = localStorage.getItem('user-login-token');

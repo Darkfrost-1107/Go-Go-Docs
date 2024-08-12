@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const envVars = z.object({
-  BACKEND_URL: z.string().url(),
+  NEXT_PUBLIC_BACKEND_URL: z.string(),
 });
 
 envVars.parse(process.env);
@@ -11,5 +11,3 @@ declare global {
     interface ProcessEnv extends z.infer<typeof envVars> {}
   }
 }
-
-export const { BACKEND_URL } = process.env;

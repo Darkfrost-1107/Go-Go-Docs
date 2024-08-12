@@ -10,7 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { secureFetch } from '@/lib/connection';
 import { User } from '@/types/user';
-import { useToast } from '../ui/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 
 type AuthContext = {
   user?: User;
@@ -23,7 +23,7 @@ type AuthContext = {
 
 const userContext = createContext<AuthContext>({
   user: undefined,
-  loading: true,
+  loading: false,
   isLogged: () => false,
   login: () => {},
   register: () => {},
@@ -38,7 +38,7 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { toast } = useToast();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User>();
 
   const router = useRouter();
