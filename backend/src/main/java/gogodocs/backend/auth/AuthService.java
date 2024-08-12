@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Transactional (rollbackFor = Exception.class)
 @RequiredArgsConstructor
 @Service
@@ -36,6 +38,7 @@ public class AuthService {
 
     public AuthResponse register (RegisterRequest registerRequest) {
         Users user = Users.builder()
+                .id(UUID.randomUUID())
                 .username(registerRequest.getUsername())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .imageURL(registerRequest.getImageURL())
