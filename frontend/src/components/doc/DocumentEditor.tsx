@@ -9,13 +9,24 @@ const DocumentEditor = () => {
   const [content, setContent] = useState<string>('');
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const handleSave = () => {
-    haveUser();
-    if (isLoggedIn) {
-      console.log("Document saved", { title, content });
-    } else {
-      console.log("You must be logged in to save a document");
-    }
+  const handleSave = (title:string) => {
+    console.log("Here")
+    const listDocument = JSON.parse(localStorage.getItem('documents') || '[]');
+    listDocument.push({title});
+    localStorage.setItem('documents', JSON.stringify(listDocument));
+    console.log(listDocument);
+    //haveUser();
+    // if (isLoggedIn) {
+    //   console.log("Document saved", { title, content });
+    // } else {
+    //   console.log("You must be logged in to save a document");
+    // }
+  }
+  const handleDelete = () => {
+    const listDocument = JSON.parse(localStorage.getItem('documents') || '[]');
+    listDocument.pop();
+    localStorage.setItem('documents', JSON.stringify(listDocument));
+    console.log(listDocument);
   }
 
   const haveUser = () => {
@@ -28,7 +39,7 @@ const DocumentEditor = () => {
     }
   }
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
+    <div className="max-w-3xl mx-auto p-4 bg-white shadow-md h-full">
       <h1 className="text-2xl font-bold mb-4">
         Document Editor
       </h1>
@@ -41,9 +52,14 @@ const DocumentEditor = () => {
           placeholder="Document Title (.docx)"
         />
         <Button
-          onClick={handleSave}
+          onClick={() => handleSave(title)}
         >
           Save
+        </Button>
+        <Button
+          onClick={handleDelete}
+        >
+          Delete
         </Button>
 
       </div>
