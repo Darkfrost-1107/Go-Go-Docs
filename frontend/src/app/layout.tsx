@@ -6,7 +6,6 @@ import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/Header';
 
 import '@/config/global';
-import Main from '@/components/layout/Main';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -25,11 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(fontSans.variable, 'min-h-screen bg-background font-sans antialiased flex flex-col items-center justify-start')}>
+      <body className={cn(fontSans.variable, 'bg-background font-sans antialiased flex flex-col items-center justify-start min-h-screen')}>
         <Header />
-        <Main />
         {children}
-        {process.env.NEXT_PUBLIC_BACKEND_URL}
         <Toaster />
       </body>
     </html>
