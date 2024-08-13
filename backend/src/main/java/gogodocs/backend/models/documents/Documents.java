@@ -25,6 +25,12 @@ public class Documents {
         this.content = new StringBuilder(documentsDTO.getContent());
     }
 
+    public Documents(Documents documents) {
+        this.id = documents.getId();
+        this.title = documents.getTitle();
+        this.content = new StringBuilder(documents.toString());
+    }
+
     public void edit(DocumentsEditAction action) {
         Range range = action.getRange();
         String newText = action.getText();
@@ -36,10 +42,10 @@ public class Documents {
                 content.insert(start, newText);
                 break;
             case REPLACE:
-                content.replace(start, end + 1, newText);
+                content.replace(start, end, newText);
                 break;
             case DELETE:
-                content.delete(start, end + 1);
+                content.delete(start, end);
                 break;
             case CHANGE_TITLE:
                 setTitle(newText);
@@ -54,5 +60,6 @@ public class Documents {
 
     public String getURL() {
         // todo: implement
+        return null;
     }
 }

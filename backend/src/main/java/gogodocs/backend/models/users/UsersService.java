@@ -19,6 +19,10 @@ public class UsersService {
         return repository.findById(uuid).orElseThrow(() -> new UserNotFound(uuid.toString()));
     }
 
+    public Users getByUsername(String username) {
+        return repository.findByUsername(username).orElseThrow(() -> new UserNotFound(username));
+    }
+
     public void addDocument(Users user, Documents document) {
         user.getDocumentsList().add(document);
     }

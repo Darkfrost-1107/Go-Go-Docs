@@ -19,21 +19,27 @@ public class DocumentsService {
         this.documents = new HashMap<>();
     }
 
-    public Documents getCachedByUUID(UUID uuid, boolean createNew) {
+    public Documents createCachedDocument() {
+        Documents doc = new Documents();
+        documents.put(doc.getId(), doc);
+        return doc;
+    }
+
+    public Documents getCachedByUUID(UUID uuid) {
         if (documents.containsKey(uuid)) {
             return documents.get(uuid);
         } else {
-            DocumentsDTO dto = repository.findById(uuid)
-                    .or(() -> {
-                        if (createNew) {
-                            DocumentsDTO newDTO = new DocumentsDTO();
-                            return Optional.of(newDTO);
-                        }
-                        return Optional.empty();
-                    })
-                    .orElseThrow(() -> new DocumentNotFound(uuid.toString()));
-            return new Documents(dto);
+            DocumentsDTO dto = repository.findById(uuid).orElseThrow(() -> new DocumentNotFound(uuid.toString()));
+            Documents doc = new Documents(dto);
+            documents.put(uuid, doc);
+            return doc;
         }
+    }
+
+    public Documents createCopy(Documents document) {
+        Documents copy = new Documents(document);
+        documents.put(copy.getId(), copy);
+        return copy;
     }
 
     public void saveDocument(Documents document) {

@@ -1,13 +1,20 @@
 package gogodocs.backend.models.documents;
 
 import gogodocs.backend.util.Range;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class DocumentsEditAction {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class DocumentsEditActionPayload {
     private Range range;
     private EditAction action;
     private String text;
+    private String username;
 }
 
 /*
@@ -17,6 +24,7 @@ public class DocumentsEditAction {
         end: 0
     },
     action: "INSERT", // INSERT, REPLACE, DELETE, CHANGE_TITLE
-    text: "string"
+    text: "string",
+    username: "string"
 }
  */
