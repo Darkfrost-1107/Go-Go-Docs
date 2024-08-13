@@ -1,55 +1,58 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
-import { Document } from '@/types/document';
 import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 
-
-const DocumentEditor = () => {
+function DocumentEditor() {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const handleSave = (title:string) => {
-    console.log("Here")
+  const handleSave = (t:string) => {
+    console.log('Here');
     const listDocument = JSON.parse(localStorage.getItem('documents') || '[]');
-    listDocument.push({title});
+    listDocument.push({ t });
     localStorage.setItem('documents', JSON.stringify(listDocument));
     console.log(listDocument);
-    //haveUser();
+    // haveUser();
     // if (isLoggedIn) {
     //   console.log("Document saved", { title, content });
     // } else {
     //   console.log("You must be logged in to save a document");
     // }
-  }
+  };
+
   const handleDelete = () => {
     const listDocument = JSON.parse(localStorage.getItem('documents') || '[]');
     listDocument.pop();
     localStorage.setItem('documents', JSON.stringify(listDocument));
     console.log(listDocument);
-  }
+  };
 
-  const haveUser = () => {
-    const tokenUser = localStorage.getItem('user-login-token');
-    console.log(tokenUser);
-    if (tokenUser) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }
+  // const haveUser = () => {
+  //   const tokenUser = localStorage.getItem('user-login-token');
+  //   console.log(tokenUser);
+  //   if (tokenUser) {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // };
+
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white shadow-md h-full">
+    <div className="max-w-3xl p-4 bg-background shadow-md h-full w-full rounded-md border border-border">
       <h1 className="text-2xl font-bold mb-4">
         Document Editor
       </h1>
       <div className="flex justify-between gap-4 mt-4">
-        <input
+        <Input
           type="text"
-          className="w-full mb-4 p-2 border-b-2 border-gray-200 outline-none"
+          className="w-full mb-4 p-2 "
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Document Title (.docx)"
+          placeholder="Document Title"
         />
         <Button
           onClick={() => handleSave(title)}
@@ -63,8 +66,8 @@ const DocumentEditor = () => {
         </Button>
 
       </div>
-      <textarea
-        className="w-full h-64 p-2 border border-gray-300 rounded-md"
+      <Textarea
+        className="w-full min-h-[34rem] p-2 border border-gray-300 rounded-md"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Write Here."

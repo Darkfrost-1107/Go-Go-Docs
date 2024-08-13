@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
-import { Button } from "../ui/button";
+'use client';
 
-const DocumentLobby: React.FC = () => {
+import React, { useState, useEffect } from 'react';
+import { Button } from '../ui/button';
+
+export default function DocumentLobby() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [documents, setDocuments] = useState<string[]>([]);
 
@@ -16,10 +18,10 @@ const DocumentLobby: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full flex flex-col items-center justify-start">
       <Button
         onClick={toggleVisibility}
-      > 
+      >
         {isVisible ? 'Hide Documents' : 'View Documents'}
       </Button>
       <div
@@ -32,8 +34,8 @@ const DocumentLobby: React.FC = () => {
           <h3 className="text-lg font-bold mb-2">Documents</h3>
           <ul>
             {documents.length > 0 ? (
-              documents.map((title, index) => (
-                <li key={index} className="mb-2 border-b border-gray-200 pb-2">{title}</li>
+              documents.map((title) => (
+                <li key={title} className="mb-2 border-b border-gray-200 pb-2">{title}</li>
               ))
             ) : (
               <li>No documents available</li>
@@ -43,6 +45,4 @@ const DocumentLobby: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default DocumentLobby;
+}
