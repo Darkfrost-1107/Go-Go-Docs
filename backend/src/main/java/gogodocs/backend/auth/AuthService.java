@@ -1,6 +1,7 @@
 package gogodocs.backend.auth;
 
 import gogodocs.backend.jwt.JwtService;
+import gogodocs.backend.models.users.Role;
 import gogodocs.backend.models.users.Users;
 import gogodocs.backend.models.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,11 +44,22 @@ public class AuthService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .imageURL(registerRequest.getImageURL())
                 .email(registerRequest.getEmail())
+                .role(Role.USER)
                 .build();
 
         usersRepository.save(user);
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
+                .build();
+    }
+
+    public UserDTO me (UUID id) {
+        Users user = usersRepository.findById(id)
+                .orElseThrow(() ->  new RuntimeException("User not found"));
+        return UserDTO.builder()
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .imageURL(user.getImageURL())
                 .build();
     }
 }
